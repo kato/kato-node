@@ -1,8 +1,8 @@
 import Context from "./context";
-import invoker from "../invoker";
-import init from "../init";
-import end from "../end";
-import stub from "../stub";
+import invoker from "./builtin/invoker";
+import init from "./builtin/init";
+import end from "./builtin/end";
+import stub from "./builtin/stub";
 
 //定义中间件的类型
 export type Middleware = (ctx?: Context, next?: Middleware) => Promise<void>;

@@ -1,5 +1,5 @@
-import {MiddlewareContainer} from "./middleware/core/container";
-import Context from "./middleware/core/context";
+import {MiddlewareContainer} from "./middleware/container";
+import Context from "./middleware/context";
 import KatoError from "./error";
 
 export default class Kato {

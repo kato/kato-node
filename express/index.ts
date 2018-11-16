@@ -1,5 +1,4 @@
-import {Kato} from "../core";
-import Context from "../core/middleware/core/context";
+import {Context, Kato} from "../core";
 import {Request, Response} from "express";
 
 //express框架适配器

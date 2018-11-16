@@ -1,0 +1,45 @@
+{
+  "name": "kato",
+  "version": "1.0.0",
+  "description": "kato server",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack --hide-modules --config webpack.prod.js",
+    "dev": "webpack -w --hide-modules --config webpack.dev.js",
+    "example": "webpack --hide-modules --config webpack.example.js && node $NODE_DEBUG_OPTION ./dist/example.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kato/kato-node.git"
+  },
+  "keywords": [
+    "kato",
+    "api",
+    "core"
+  ],
+  "author": "李雨田 <demon@danwi.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kato/kato-node/issues"
+  },
+  "homepage": "https://github.com/kato/kato-node#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@types/express": "^4.16.0",
+    "@types/node": "^10.12.8",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^1.0.0",
+    "express": "^4.16.4",
+    "ts-loader": "^5.3.0",
+    "typescript": "^3.1.6",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-merge": "^4.1.4",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "debug": "^4.1.0",
+    "get-parameter-names": "^0.3.0"
+  }
+}

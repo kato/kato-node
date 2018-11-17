@@ -4,5 +4,6 @@ node_js:
 cache: npm
 
 script:
+- set -e
 - npm run test
 - npm run build

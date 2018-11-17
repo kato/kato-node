@@ -29,7 +29,7 @@ export class MiddlewareContainer {
   }
 
   async do(ctx: Context) {
-    debug(`管道处理开始: ${ctx.req.url}`);
+    debug(`管道处理开始: ${ctx.req.url.split('?')[0]}`);
     const start = new Date();
     let currentMiddlewareIndex = 0;
 
@@ -43,7 +43,7 @@ export class MiddlewareContainer {
     };
 
     await next(ctx);
-    debug(`管道处理完毕: ${ctx.req.url}, 耗时 ${new Date().getTime() - start.getTime()}ms`);
+    debug(`管道处理完毕: ${ctx.req.url.split('?')[0]}, 耗时 ${new Date().getTime() - start.getTime()}ms`);
   }
 
   use(middleware: Middleware, locateMiddleware?: Middleware) {

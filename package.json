@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --hide-modules --config webpack.prod.js",
     "dev": "webpack -w --hide-modules --config webpack.dev.js",
-    "example": "webpack --hide-modules --config webpack.example.js && node $NODE_DEBUG_OPTION ./dist/example.js"
+    "example": "webpack -w --hide-modules --config webpack.example.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
     "express": "^4.16.4",
+    "nodemon-webpack-plugin": "^4.0.3",
     "ts-loader": "^5.3.0",
     "typescript": "^3.1.6",
     "webpack": "^4.25.1",

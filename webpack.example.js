@@ -1,5 +1,6 @@
-let merge = require('webpack-merge');
-let base = require('./webpack.base');
+const merge = require('webpack-merge');
+const base = require('./webpack.base');
+const NodemonPlugin = require('nodemon-webpack-plugin');
 
 module.exports = merge(base, {
   mode: 'development',
@@ -7,4 +8,9 @@ module.exports = merge(base, {
   entry: {
     example: './example/index.js',
   },
+  plugins: [
+    new NodemonPlugin({
+      nodeArgs: ['--inspect']
+    })
+  ]
 });

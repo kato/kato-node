@@ -13,7 +13,7 @@ beforeAll(() => {
 describe('simple', () => {
   test('request test', async () => {
     const res = await request(app)
-      .post('/api')
+      .post('/api/fakeModule/fakeMethod.ac')
       .send();
 
     expect(JSON.parse(res.text).code).toBe(0);

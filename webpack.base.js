@@ -3,6 +3,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   target: "node",
+  output: {
+    libraryTarget: "commonjs"
+  },
   module: {
     rules: [
       {

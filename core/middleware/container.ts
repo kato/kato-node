@@ -4,6 +4,8 @@ import init from "./builtin/init";
 import end from "./builtin/end";
 import stub from "./builtin/stub";
 
+const debug = require('debug')('kato:middle:container');
+
 //定义中间件的类型
 export type Middleware = (ctx?: Context, next?: Middleware) => Promise<void>;
 
@@ -22,6 +24,7 @@ export class MiddlewareContainer {
       invoker,
       end
     ];
+    debug(`加载了${this.middlewares.length}个中间件 => [${this.middlewares.map(it => it.name || '匿名').join(',')}]`);
     this.firstMiddleware = this.middlewares[0];
   }
 
@@ -31,7 +34,9 @@ export class MiddlewareContainer {
     const next = async (newCtx?: Context, newNext?: Middleware) => {
       const nextMiddleware = this.middlewares[currentMiddlewareIndex++];
       if (typeof nextMiddleware === 'function') {
-        await nextMiddleware.call(null, newCtx || ctx, newNext || next)
+        debug(`进入${nextMiddleware.name || '匿名'}中间件`);
+        await nextMiddleware.call(null, newCtx || ctx, newNext || next);
+        debug(`离开${nextMiddleware.name || '匿名'}中间件`);
       }
     };
 
@@ -39,6 +44,7 @@ export class MiddlewareContainer {
   }
 
   use(middleware: Middleware, locateMiddleware?: Middleware) {
+    debug(`添加${middleware.name}中间件在${locateMiddleware ? locateMiddleware.name : '预制'}中间件之前`);
     let index = this.middlewares.findIndex(it => it === (locateMiddleware || this.firstMiddleware));
     if (index < 0)
       index = 0;
@@ -46,6 +52,7 @@ export class MiddlewareContainer {
   }
 
   useAfter(middleware: Middleware, locateMiddleware: Middleware) {
+    debug(`添加${middleware.name}中间件在${locateMiddleware ? locateMiddleware.name : '所有'}中间件之后`);
     let index = this.middlewares.findIndex(it => it === locateMiddleware);
     if (index < 0)
       index = this.middlewares.length;

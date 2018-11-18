@@ -1,6 +1,6 @@
 import Context from "../context";
-import {Middleware} from "../container";
-import KatoError from "../../error";
+import {Middleware} from "../middleware";
+import KatoError from "../error";
 
 //最后的中间件,用于把context中的东西输出到http连接
 export default async function end(ctx: Context, next: Middleware) {

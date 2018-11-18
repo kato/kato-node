@@ -1,8 +1,8 @@
 import Context from "./context";
-import invoker from "./builtin/invoker";
-import init from "./builtin/init";
-import end from "./builtin/end";
-import stub from "./builtin/stub";
+import invoker from "./middleware/invoker";
+import init from "./middleware/init";
+import end from "./middleware/end";
+import stub from "./middleware/stub";
 
 const debug = require('debug')('kato:middle:container');
 

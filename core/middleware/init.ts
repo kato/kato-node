@@ -1,5 +1,5 @@
 import Context from "../context";
-import {Middleware} from "../container";
+import {Middleware} from "../middleware";
 
 const debug = require('debug')('kato:middle:init');
 const regex = /^\/(?:([^\/]+?))\/(?:([^\/]+?))\.ac$/;

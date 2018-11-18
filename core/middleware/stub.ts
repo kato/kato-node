@@ -1,5 +1,5 @@
 import Context from "../context";
-import {Middleware} from "../container";
+import {Middleware} from "../middleware";
 
 //存根信息中间件,用于相应客户端的存根信息
 export default async function stub({req, res}: Context, next: Middleware) {

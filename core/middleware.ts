@@ -4,7 +4,7 @@ import init from "./middleware/init";
 import end from "./middleware/end";
 import stub from "./middleware/stub";
 
-const debug = require('debug')('kato:middle:container');
+const debug = require('debug')('kato:core:middle');
 
 //定义中间件的类型
 export type Middleware = (ctx?: Context, next?: Middleware) => Promise<void>;

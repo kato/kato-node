@@ -1,5 +1,7 @@
-import {Context, Kato} from "../core";
 import {Request, Response} from "express";
+
+import Kato from "../core/kato";
+import Context from "../core/middleware/context";
 
 //express框架适配器
 export function adapter(kato: Kato) {

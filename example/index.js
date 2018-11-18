@@ -1,6 +1,5 @@
 import express from 'express'
-import {Kato} from "../index";
-import {ExpressAdapter} from '../index'
+import {Kato, ExpressAdapter} from "../index";
 
 (async () => {
   //新建一个应用程序

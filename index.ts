@@ -9,6 +9,7 @@ export {default as EndMiddleware} from './core/middleware/end'
 export {default as Kato} from './core/kato'
 export {default as Context} from './core/context'
 export {default as KatoError} from './core/error'
+export {alias} from './core/module'
 
 //express适配器
 export {adapter as ExpressAdapter} from './express'

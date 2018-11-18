@@ -1,4 +1,4 @@
-const {Kato, ExpressAdapter} = require('../../index');
+const {Kato, ExpressAdapter} = require('../..');
 const express = require('express');
 const request = require('supertest');
 

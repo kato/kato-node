@@ -25,6 +25,10 @@ module.exports = {
                   node: '6'
                 }
               }]
+            ],
+            plugins: [
+              ['@babel/plugin-proposal-decorators', {legacy: true}],
+              '@babel/plugin-proposal-class-properties'
             ]
           }
         }

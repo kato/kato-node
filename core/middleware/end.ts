@@ -6,7 +6,7 @@ import KatoError from "../error";
 export default async function end(ctx: Context, next: Middleware) {
   //拿到res,并设置属性
   const res = ctx.res;
-  res.setHeader("Context-Type", "application/json");
+  res.setHeader("Content-Type", "application/json");
 
   if (ctx.error) {
     //响应错误

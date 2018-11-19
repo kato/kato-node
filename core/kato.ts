@@ -32,7 +32,7 @@ export default class Kato {
         err = new KatoError(e.message)
       }
       const res = ctx.res;
-      res.setHeader("Context-Type", "application/json");
+      res.setHeader("Content-Type", "application/json");
       res.end(JSON.stringify({
         code: err.code,
         message: err.message

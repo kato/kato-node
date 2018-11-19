@@ -7,23 +7,24 @@ const debug = require('debug')('kato:core');
 
 export default class Kato {
   //中间件容器
-  private middlewareContainer = new MiddlewareContainer();
+  middlewares = new MiddlewareContainer();
   //模块容器
-  private moduleContainer = new ModuleContainer();
+  modules = new ModuleContainer();
 
   //添加中间件
-  use = this.middlewareContainer.use.bind(this.middlewareContainer);
+  use = this.middlewares.use.bind(this.middlewares);
   //添加中间件
-  useAfter = this.middlewareContainer.useAfter.bind(this.middlewareContainer);
+  useAfter = this.middlewares.useAfter.bind(this.middlewares);
 
   //加载api模块
-  load = this.moduleContainer.load.bind(this.moduleContainer);
+  load = this.modules.load.bind(this.modules);
 
   //执行来自适配器过来的实例
   async do(ctx: Context) {
     try {
+      ctx.kato = this;
       //交给中间件去处理
-      await this.middlewareContainer.do(ctx);
+      await this.middlewares.do(ctx);
     } catch (e) {
       //抓住中间件中没有处理的错误
       debug(`中间件出现异常 : ${e}`);

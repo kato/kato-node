@@ -1,5 +1,6 @@
 import Context from "../context";
 import {Middleware} from "../middleware";
+import KatoError from "../error";
 
 const debug = require('debug')('kato:middle:init');
 const regex = /^\/(?:([^\/]+?))\/(?:([^\/]+?))\.ac$/;
@@ -8,10 +9,22 @@ const regex = /^\/(?:([^\/]+?))\/(?:([^\/]+?))\.ac$/;
 export default async function init(ctx: Context, next: Middleware) {
   const path = ctx.req.url.split('?')[0];
   const match = regex.exec(path);
-  ctx.moduleName = match[1];
-  ctx.methodName = match[2];
+  let moduleName = match[1];
+  let methodName = match[2];
 
-  debug(`模块: ${ctx.moduleName} 方法: ${ctx.methodName}`);
-
-  await next()
+  //查找对应的模块和方法
+  let module = ctx.kato.modules.get(moduleName);
+  if (module) {
+    let method = module.methods.get(methodName);
+    if (method) {
+      ctx.module = module;
+      ctx.method = method;
+      debug(`模块: ${module.name} 方法: ${method.name}`);
+      await next()
+    } else {
+      throw new KatoError(`模块${moduleName}中找不到对应的方法${methodName}`);
+    }
+  } else {
+    throw new KatoError(`找不到对应的模块${moduleName}`);
+  }
 }

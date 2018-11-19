@@ -3,6 +3,7 @@ import invoker from "./middleware/invoker";
 import init from "./middleware/init";
 import end from "./middleware/end";
 import stub from "./middleware/stub";
+import trycatch from "./middleware/trycatch";
 
 const debug = require('debug')('kato:core:middle');
 
@@ -19,6 +20,7 @@ export class MiddlewareContainer {
   constructor() {
     //初始化内建的中间件
     this.middlewares = [
+      trycatch,
       stub,
       init,
       invoker,

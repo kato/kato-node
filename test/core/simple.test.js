@@ -16,7 +16,9 @@ describe('simple', () => {
       .post('/api/fakeModule/fakeMethod.ac')
       .send();
 
-    expect(JSON.parse(res.text).code).toBe(0);
+    let result = JSON.parse(res.text);
+    expect(result.code).toBe(-1);
+    expect(result.message).toBe('找不到对应的模块fakeModule');
   });
 });
 

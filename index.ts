@@ -1,9 +1,9 @@
 //导出各种东东
 //中间件模块中的
-export {default as InitMiddleware} from './core/middleware/init'
+export {default as ParseMiddleware} from './core/middleware/parse'
 export {default as TryCatchMiddleware} from './core/middleware/trycatch'
 export {default as StubMiddleware} from './core/middleware/stub'
-export {default as InvokerMiddleware} from './core/middleware/invoker'
+export {default as InvokeMiddleware} from './core/middleware/invoke'
 export {default as EndMiddleware} from './core/middleware/end'
 
 //core模块中的

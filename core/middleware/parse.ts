@@ -5,14 +5,20 @@ import KatoError from "../error";
 const debug = require('debug')('kato:middle:init');
 const regex = /^\/(?:([^\/]+?))\/(?:([^\/]+?))\.ac$/;
 
-//初始化中间件,用于初始化context中的一些属性
-export default async function init(ctx: Context, next: Middleware) {
+//解析url中的模块名和方法名
+export default async function parse(ctx: Context, next: Middleware) {
   const path = ctx.req.url.split('?')[0];
   const match = regex.exec(path);
+
+  //如果路由不匹配
+  if (!match) {
+    throw new KatoError("请求url不符合规范")
+  }
+
+  //查找对应的模块和方法
   let moduleName = match[1];
   let methodName = match[2];
 
-  //查找对应的模块和方法
   let module = ctx.kato.modules.get(moduleName);
   if (module) {
     let method = module.methods.get(methodName);

@@ -1,6 +1,6 @@
 import Context from "./context";
-import invoker from "./middleware/invoker";
-import init from "./middleware/init";
+import invoke from "./middleware/invoke";
+import parse from "./middleware/parse";
 import end from "./middleware/end";
 import stub from "./middleware/stub";
 import trycatch from "./middleware/trycatch";
@@ -22,8 +22,8 @@ export class MiddlewareContainer {
     this.middlewares = [
       trycatch,
       stub,
-      init,
-      invoker,
+      parse,
+      invoke,
       end
     ];
     debug(`加载了${this.middlewares.length}个中间件 => [${this.middlewares.map(it => it.name || '匿名').join(',')}]`);

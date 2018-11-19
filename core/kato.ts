@@ -26,7 +26,7 @@ export default class Kato {
       await this.middlewareContainer.do(ctx);
     } catch (e) {
       //抓住中间件中没有处理的错误
-      debug(`中间件处理过程中出现未捕获的异常 : ${e}`);
+      debug(`中间件出现异常 : ${e}`);
       let err = e;
       if (!(e instanceof KatoError)) {
         err = new KatoError(e.message)

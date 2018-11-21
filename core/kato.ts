@@ -1,14 +1,43 @@
 import Context from "./context";
 import {MiddlewareContainer} from "./middleware";
 import {ModuleContainer} from "./module";
+import {jsonStringify} from "./common/json";
 
 const debug = require('debug')('kato:core');
+
+type KatoConfig = {
+  loose?: boolean,
+  files?: {
+    maxSize?: number
+    maxCount?: number
+  }
+}
 
 export default class Kato {
   //中间件容器
   middlewares = new MiddlewareContainer();
   //模块容器
   modules = new ModuleContainer();
+  //配置
+  config: KatoConfig;
+
+  constructor(config?: KatoConfig) {
+    //初始化配置
+    const defaultConfig: KatoConfig = {
+      loose: false,
+      files: {
+        maxCount: 5,
+        maxSize: 50000000
+      }
+    };
+    this.config = {
+      ...defaultConfig, ...{
+        loose: config.loose,
+        files: {...defaultConfig.files, ...config.files}
+      }
+    };
+    debug(`config: ${jsonStringify(this.config)}`);
+  }
 
   //添加中间件
   use = this.middlewares.use.bind(this.middlewares);

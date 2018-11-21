@@ -47,7 +47,10 @@
     "webpack-node-externals": "^1.7.2"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "debug": "^4.1.0",
-    "get-parameter-names": "^0.3.0"
+    "get-parameter-names": "^0.3.0",
+    "multer": "^1.4.1",
+    "qs": "^6.5.2"
   }
 }

@@ -4,6 +4,7 @@ import parse from "./middleware/parse";
 import end from "./middleware/end";
 import stub from "./middleware/stub";
 import trycatch from "./middleware/trycatch";
+import parameter from "./middleware/parameter";
 
 const debug = require('debug')('kato:core:middle');
 
@@ -23,6 +24,7 @@ export class MiddlewareContainer {
       trycatch,
       stub,
       parse,
+      parameter,
       invoke,
       end
     ];

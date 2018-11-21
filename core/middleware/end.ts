@@ -1,5 +1,6 @@
 import Context from "../context";
 import {Middleware} from "../middleware";
+import {jsonStringify} from "../common/json";
 
 //最后的中间件,用于把context中的东西输出到http连接
 export default async function end(ctx: Context, next: Middleware) {
@@ -7,7 +8,7 @@ export default async function end(ctx: Context, next: Middleware) {
   const res = ctx.res;
   res.setHeader("Content-Type", "application/json");
   //end只需要处理正常的返回
-  res.end(JSON.stringify({
+  res.end(jsonStringify({
     code: 0,
     data: ctx.result
   }));

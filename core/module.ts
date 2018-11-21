@@ -1,3 +1,5 @@
+import * as getParameterNames from 'get-parameter-names'
+
 const debug = require('debug')('kato:core:module');
 
 export class ModuleDescriptor {
@@ -53,11 +55,31 @@ export class ModuleDescriptor {
 export class MethodDescriptor {
   //方法名
   name: string;
+  //参数
+  parameters: ParameterDescriptor[];
 
   constructor(public method: Function | any, public parent: ModuleDescriptor) {
     this.name = method.__alias || method.name;
     if (!this.name)
       throw new Error("kato:不允许有匿名方法");
+
+    //获取所有的参数
+    this.parameters = getParameterNames(method)
+      .map(name => new ParameterDescriptor(name, "any"));
+  }
+
+  toString() {
+    return `${this.name}(${this.parameters.join(', ')})`
+  }
+}
+
+export class ParameterDescriptor {
+  //目前暂时支持5种类型
+  constructor(public name: string, public type: "any" | "number" | "string" | "date" | "array") {
+  }
+
+  toString() {
+    return `${this.name}: ${this.type}`
   }
 }
 
@@ -82,7 +104,10 @@ export class ModuleContainer extends Map<string, ModuleDescriptor> {
     for (let methodName of module.methods.keys()) {
       methodNames.push(methodName)
     }
-    debug(`模块${module.name}加载完成\n函数${module.methods.size}个 => [${methodNames.join(',')}]`)
+    debug(`模块${module.name}加载完成,函数${module.methods.size}个`);
+    for (let method of module.methods.values()) {
+      debug(`\t-> ${method}`)
+    }
   }
 }
 
@@ -99,7 +124,6 @@ export function alias(name) {
       }
       target.__alias = name;
     }
-  }
-  else
+  } else
     throw new Error("kato:名称不能为空");
 }

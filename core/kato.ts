@@ -1,4 +1,5 @@
-import * as mergeOptions from 'merge-options'
+import * as mergeOptions from 'merge-options';
+import * as http from "http";
 import Context from "./context";
 import {MiddlewareContainer} from "./middleware";
 import {ModuleContainer} from "./module";
@@ -21,6 +22,9 @@ export default class Kato {
   modules = new ModuleContainer();
   //配置
   options: KatoOptions;
+
+  //原生服务器,node自带的,当不使用第三方框架的时候使用
+  private nativeServer: http.Server;
 
   constructor(options: KatoOptions = {}) {
     //初始化配置
@@ -49,4 +53,23 @@ export default class Kato {
     //交给中间件去处理
     await this.middlewares.do(ctx);
   }
+
+  //启动原生服务器
+  async listen(port: number, hostname: string = "localhost") {
+    return new Promise(((resolve, reject) => {
+      this.nativeServer = http.createServer((req, res) => this.do(new Context(req, res)));
+      this.nativeServer.listen.call(this.nativeServer, port, hostname, err => {
+        err ? reject(err) : resolve();
+      });
+    }));
+  };
+
+  //关闭node原生服务器
+  async close(callback) {
+    return new Promise(resolve => {
+      this.nativeServer.close.call(this.nativeServer, () => {
+        resolve();
+      });
+    })
+  };
 }

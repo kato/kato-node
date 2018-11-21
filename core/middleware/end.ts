@@ -8,10 +8,7 @@ export default async function end(ctx: Context, next: Middleware) {
   const res = ctx.res;
   res.setHeader("Content-Type", "application/json");
   //end只需要处理正常的返回
-  res.end(jsonStringify({
-    code: 0,
-    data: ctx.result
-  }));
+  res.end(jsonStringify(ctx.result));
 
   //继续下一个中间件,如果有需要的话
   await next();

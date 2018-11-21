@@ -1,3 +1,4 @@
+import * as mergeOptions from 'merge-options'
 import Context from "./context";
 import {MiddlewareContainer} from "./middleware";
 import {ModuleContainer} from "./module";
@@ -5,7 +6,7 @@ import {jsonStringify} from "./common/json";
 
 const debug = require('debug')('kato:core');
 
-type KatoConfig = {
+type KatoOptions = {
   loose?: boolean,
   files?: {
     maxSize?: number
@@ -19,24 +20,19 @@ export default class Kato {
   //模块容器
   modules = new ModuleContainer();
   //配置
-  config: KatoConfig;
+  options: KatoOptions;
 
-  constructor(config?: KatoConfig) {
+  constructor(options: KatoOptions = {}) {
     //初始化配置
-    const defaultConfig: KatoConfig = {
+    const defaultOptions: KatoOptions = {
       loose: false,
       files: {
         maxCount: 5,
         maxSize: 50000000
       }
     };
-    this.config = {
-      ...defaultConfig, ...{
-        loose: config.loose,
-        files: {...defaultConfig.files, ...config.files}
-      }
-    };
-    debug(`config: ${jsonStringify(this.config)}`);
+    this.options = mergeOptions.call({concatArrays: true}, defaultOptions, options);
+    debug(`config: ${jsonStringify(this.options)}`);
   }
 
   //添加中间件

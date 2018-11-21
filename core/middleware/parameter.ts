@@ -36,8 +36,8 @@ export default async function parameter(ctx: Context, next: Middleware) {
   const multipartParser = middlewareWrapper(multer({
     storage: multer.memoryStorage(),
     limits: {
-      files: ctx.kato.config.files.maxCount,
-      fileSize: ctx.kato.config.files.maxSize
+      files: ctx.kato.options.files.maxCount,
+      fileSize: ctx.kato.options.files.maxSize
     },
   }).any());
   await multipartParser(req, res);
@@ -52,7 +52,7 @@ export default async function parameter(ctx: Context, next: Middleware) {
         ctx.parameters[name] = jsonParse(combined[name]);
       } catch (e) {
         //如果是loose模式,则当出现无法解析的情况的时候,把它转换为字符串再解析
-        if (ctx.kato.config.loose)
+        if (ctx.kato.options.loose)
           ctx.parameters[name] = jsonParse(JSON.stringify(combined[name]));
         else
           throw e;

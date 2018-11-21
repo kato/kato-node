@@ -13,7 +13,7 @@ describe('其他测试', () => {
 
     let result = JSON.parse(res.text);
     expect(result._KatoErrorCode_).toBe(-1);
-    expect(result.message).toBe('请求url不符合规范');
+    expect(result._KatoErrorMessage_).toBe('请求url不符合规范');
   });
 
   test('不存在的模块', async () => {
@@ -23,7 +23,7 @@ describe('其他测试', () => {
 
     let result = JSON.parse(res.text);
     expect(result._KatoErrorCode_).toBe(-1);
-    expect(result.message).toBe('找不到对应的模块fakeModule');
+    expect(result._KatoErrorMessage_).toBe('找不到对应的模块fakeModule');
   });
 
   test('不存在的方法', async () => {
@@ -33,7 +33,7 @@ describe('其他测试', () => {
 
     let result = JSON.parse(res.text);
     expect(result._KatoErrorCode_).toBe(-1);
-    expect(result.message).toBe('模块Misc中找不到对应的方法fakeMethod');
+    expect(result._KatoErrorMessage_).toBe('模块Misc中找不到对应的方法fakeMethod');
   });
 
   test('基本调用', async () => {

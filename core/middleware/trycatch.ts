@@ -19,7 +19,7 @@ export default async function trycatch(ctx: Context, next: Middleware) {
     res.setHeader("Content-Type", "application/json");
     res.end(jsonStringify({
       _KatoErrorCode_: err.code,
-      message: err.message
+      _KatoErrorMessage_: err.message
     }))
   }
 }

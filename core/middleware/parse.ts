@@ -2,7 +2,7 @@ import Context from "../context";
 import {Middleware} from "../middleware";
 import KatoError from "../error";
 
-const debug = require('debug')('kato:middle:init');
+const debug = require('debug')('kato:middle:parse');
 const regex = /^\/(?:([^\/]+?))\/(?:([^\/]+?))\.ac$/;
 
 //解析url中的模块名和方法名

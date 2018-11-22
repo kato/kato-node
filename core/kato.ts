@@ -9,6 +9,7 @@ const debug = require('debug')('kato:core');
 
 type KatoOptions = {
   dev?: boolean,
+  outputRuntimeError?: boolean,
   loose?: boolean,
   files?: {
     maxSize?: number
@@ -31,6 +32,7 @@ export default class Kato {
     const defaultOptions: KatoOptions = {
       dev: false,
       loose: false,
+      outputRuntimeError: true,
       files: {
         maxCount: 5,
         maxSize: 50000000

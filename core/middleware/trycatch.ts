@@ -25,9 +25,11 @@ export default async function trycatch(ctx: Context, next: Middleware) {
       _KatoErrorMessage_: err.message,
       _KatoErrorStack_: ctx.kato.options.dev ? err.stack : ''
     }));
-    //输出到http的同时,针对运行时错误,还需要输出到控制台,以便记录
-    if (err instanceof KatoRuntimeError) {
-      console.error(err);
+    if (ctx.kato.options.outputRuntimeError) {
+      //输出到http的同时,针对运行时错误,还需要输出到控制台,以便记录
+      if (err instanceof KatoRuntimeError) {
+        console.error(err);
+      }
     }
   }
 }

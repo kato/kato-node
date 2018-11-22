@@ -34,7 +34,7 @@ export default async function parameter(ctx: Context, next: Middleware) {
 
   //解析multipart数据
   const multipartParser = middlewareWrapper(multer({
-    storage: multer.memoryStorage(),
+    storage: ctx.kato.options.files.storage || multer.memoryStorage(),
     limits: {
       files: ctx.kato.options.files.maxCount,
       fileSize: ctx.kato.options.files.maxSize

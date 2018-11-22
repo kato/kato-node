@@ -55,6 +55,7 @@
     "get-parameter-names": "^0.3.0",
     "merge-options": "^1.0.1",
     "multer": "^1.4.1",
+    "prettyjson": "^1.2.1",
     "qs": "^6.5.2",
     "source-map-support": "^0.5.9"
   }

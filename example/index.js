@@ -12,4 +12,4 @@ import {Kato, ExpressAdapter} from "../index";
   app.on('error', err => console.log('express error:', err.message));
   app.listen(3000, () => console.log('listening on 3000...'));
 
-})().catch(err => console.error("主函数错误:", err.message));
+})().catch(err => console.error("主函数错误:", err));

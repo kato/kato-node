@@ -3,6 +3,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   target: "node",
+  devtool: 'source-map',
   output: {
     libraryTarget: "commonjs"
   },

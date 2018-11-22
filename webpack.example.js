@@ -4,9 +4,11 @@ const NodemonPlugin = require('nodemon-webpack-plugin');
 
 module.exports = merge(base, {
   mode: 'development',
-  devtool: 'inline-source-map',
   entry: {
-    example: './example/index.js',
+    example: [
+      'source-map-support/register',
+      './example/index.js'
+    ],
   },
   plugins: [
     new NodemonPlugin({

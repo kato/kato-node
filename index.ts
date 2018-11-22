@@ -10,7 +10,7 @@ export {default as EndMiddleware} from './core/middleware/end'
 //core模块中的
 export {default as Kato} from './core/kato'
 export {default as Context} from './core/context'
-export {default as KatoError} from './core/error'
+export * from './core/error'
 export {alias} from './core/module'
 
 //express适配器

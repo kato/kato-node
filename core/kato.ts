@@ -8,6 +8,7 @@ import {jsonStringify} from "./common/json";
 const debug = require('debug')('kato:core');
 
 type KatoOptions = {
+  dev?: boolean,
   loose?: boolean,
   files?: {
     maxSize?: number
@@ -28,6 +29,7 @@ export default class Kato {
   constructor(options: KatoOptions = {}) {
     //初始化配置
     const defaultOptions: KatoOptions = {
+      dev: false,
       loose: false,
       files: {
         maxCount: 5,

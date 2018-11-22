@@ -1,7 +1,7 @@
-import KatoError from "../error";
 import {Middleware} from "../middleware";
 import Context from "../context";
 import {jsonStringify} from "../common/json";
+import {KatoError, KatoRuntimeError} from "../error";
 
 const debug = require('debug')('kato:middle:trycatch');
 
@@ -13,13 +13,17 @@ export default async function trycatch(ctx: Context, next: Middleware) {
     //抓住中间件中的错误
     let err = e;
     if (!(e instanceof KatoError)) {
-      err = new KatoError(e.message)
+      //如果不是一个KatoError,可以将它转化为KatoError
+      err = new KatoRuntimeError(e.message);
+      err.stack = e.stack || '';
     }
+    //准备输出错误信息到http连接
     const res = ctx.res;
     res.setHeader("Content-Type", "application/json");
     res.end(jsonStringify({
       _KatoErrorCode_: err.code,
-      _KatoErrorMessage_: err.message
+      _KatoErrorMessage_: err.message,
+      _KatoErrorStack_: ctx.kato.options.dev ? err.stack : ''
     }))
   }
 }

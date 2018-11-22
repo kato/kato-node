@@ -1,6 +1,6 @@
 import Context from "../context";
 import {Middleware} from "../middleware";
-import KatoError from "../error";
+import {KatoRuntimeError} from "../error";
 
 const debug = require('debug')('kato:middle:parse');
 const regex = /^\/(?:([^\/]+?))\/(?:([^\/]+?))\.ac$/;
@@ -12,7 +12,7 @@ export default async function parse(ctx: Context, next: Middleware) {
 
   //如果路由不匹配
   if (!match) {
-    throw new KatoError("请求url不符合规范")
+    throw new KatoRuntimeError("请求url不符合规范")
   }
 
   //查找对应的模块和方法
@@ -28,9 +28,9 @@ export default async function parse(ctx: Context, next: Middleware) {
       debug(`模块: ${module.name} 方法: ${method.name}`);
       await next()
     } else {
-      throw new KatoError(`模块${moduleName}中找不到对应的方法${methodName}`);
+      throw new KatoRuntimeError(`模块${moduleName}中找不到对应的方法${methodName}`);
     }
   } else {
-    throw new KatoError(`找不到对应的模块${moduleName}`);
+    throw new KatoRuntimeError(`找不到对应的模块${moduleName}`);
   }
 }

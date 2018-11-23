@@ -10,8 +10,7 @@
     "build": "webpack --hide-modules --config webpack.prod.js",
     "dev": "webpack -w --hide-modules --config webpack.dev.js",
     "example": "webpack -w --hide-modules --config webpack.example.js",
-    "test": "webpack --hide-modules --config webpack.prod.js && jest",
-    "prepublish": "npm run build"
+    "test": "webpack --hide-modules --config webpack.prod.js && jest"
   },
   "repository": {
     "type": "git",

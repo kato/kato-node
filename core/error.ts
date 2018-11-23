@@ -9,8 +9,8 @@ export class KatoError extends Error {
 //kato 通用错误,错误码为0,这类错误可以直接显示给人类查看
 export class KatoCommonError extends KatoError {
   constructor(message: string) {
-    if (message) {
-      console.warn(``)
+    if (typeof message !== 'string') {
+      console.error(`KatoCommonError用于通用错误的表示,请保证message参数的可阅读性`)
     }
     super(message, 0);
     this.name = 'KatoCommonError';

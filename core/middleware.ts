@@ -4,7 +4,10 @@ import parse from "./middleware/parse";
 import end from "./middleware/end";
 import stub from "./middleware/stub";
 import trycatch from "./middleware/trycatch";
-import parameter from "./middleware/parameter";
+import queryString from "./middleware/parameter/query-string";
+import jsonBody from "./middleware/parameter/json-body";
+import urlEncoded from "./middleware/parameter/url-encoded";
+import multipart from "./middleware/parameter/multipart";
 
 const debug = require('debug')('kato:core:middle');
 
@@ -24,7 +27,10 @@ export class MiddlewareContainer {
       trycatch,
       stub,
       parse,
-      parameter,
+      queryString,
+      jsonBody,
+      urlEncoded,
+      multipart,
       invoke,
       end
     ];

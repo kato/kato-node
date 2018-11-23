@@ -1,7 +1,10 @@
 //导出各种东东
 //中间件模块中的
 export {default as ParseMiddleware} from './core/middleware/parse'
-export {default as ParameterMiddleware} from './core/middleware/parameter'
+export {default as QueryStringMiddleware} from './core/middleware/parameter/query-string'
+export {default as JsonBodyMiddleware} from './core/middleware/parameter/json-body'
+export {default as UrlEncodedMiddleware} from './core/middleware/parameter/url-encoded'
+export {default as MultipartMiddleware} from './core/middleware/parameter/multipart'
 export {default as TryCatchMiddleware} from './core/middleware/trycatch'
 export {default as StubMiddleware} from './core/middleware/stub'
 export {default as InvokeMiddleware} from './core/middleware/invoke'

@@ -12,9 +12,9 @@ export default async function authenticate(ctx: Context, next: Middleware) {
     const combinedAuth = or(...authFuncs);
     if (!(await combinedAuth(ctx)))
       throw new KatoRuntimeError(`不具备调用${ctx.module.name}.${ctx.method.name}的权限`)
-
-    await next();
   }
+
+  await next();
 }
 
 //定义验证函数

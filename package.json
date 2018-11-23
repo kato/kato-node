@@ -1,13 +1,17 @@
 {
-  "name": "kato",
-  "version": "1.0.0",
+  "name": "kato-server",
+  "version": "0.0.1",
   "description": "kato server",
   "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "webpack --hide-modules --config webpack.prod.js",
     "dev": "webpack -w --hide-modules --config webpack.dev.js",
     "example": "webpack -w --hide-modules --config webpack.example.js",
-    "test": "webpack --hide-modules --config webpack.prod.js && jest"
+    "test": "webpack --hide-modules --config webpack.prod.js && jest",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",

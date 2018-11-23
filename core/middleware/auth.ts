@@ -8,26 +8,13 @@ const debug = require('debug')('kato:middle:auth');
 export default async function authenticate(ctx: Context, next: Middleware) {
   const authFuncs = ctx.method.method.__authFuncs;
   if (authFuncs instanceof Array) {
-    //并行地执行验证函数
-    const promises = authFuncs.map(func => {
-      const promise = func(ctx);
-      if (promise.then) {
-        return promise;
-      } else {
-        //如果不是一个promise,将结果转换为一个promise
-        return Promise.resolve(promise)
-      }
-    });
+    //将验证函数变成为or组合
+    const combinedAuth = or(...authFuncs);
+    if (!(await combinedAuth(ctx)))
+      throw new KatoRuntimeError(`不具备调用${ctx.module.name}.${ctx.method.name}的权限`)
 
-    const authResults = await Promise.all(promises);
-    for (const result of authResults) {
-      if (!result) {
-        throw new KatoRuntimeError(`不具备调用${ctx.module.name}.${ctx.method.name}的权限`)
-      }
-    }
+    await next();
   }
-
-  await next();
 }
 
 //定义验证函数

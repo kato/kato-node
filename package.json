@@ -12,6 +12,11 @@
     "example": "webpack -w --hide-modules --config webpack.example.js",
     "test": "webpack --hide-modules --config webpack.prod.js && jest"
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm test"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kato/kato-node.git"

@@ -1,5 +1,5 @@
 {
-  "name": "kato",
+  "name": "kato-server",
   "version": "0.0.1",
   "description": "kato server",
   "main": "dist/index.js",

@@ -10,9 +10,12 @@ export {default as StubMiddleware} from './core/middleware/stub'
 export {default as InvokeMiddleware} from './core/middleware/invoke'
 export {default as EndMiddleware} from './core/middleware/end'
 export {default as ValidateMiddleware} from './core/middleware/validate'
+export {default as AuthenticateMiddleware} from './core/middleware/auth'
 
 //validate
 export {validate, should} from './core/middleware/validate'
+//auth
+export {auth, and, or, not} from './core/middleware/auth'
 
 //core模块中的
 export {default as Kato} from './core/kato'

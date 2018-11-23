@@ -9,6 +9,7 @@ import jsonBody from "./middleware/parameter/json-body";
 import urlEncoded from "./middleware/parameter/url-encoded";
 import multipart from "./middleware/parameter/multipart";
 import paramValidate from "./middleware/validate";
+import authenticate from "./middleware/auth";
 
 const debug = require('debug')('kato:core:middle');
 
@@ -32,6 +33,7 @@ export class MiddlewareContainer {
       jsonBody,
       urlEncoded,
       multipart,
+      authenticate,
       paramValidate,
       invoke,
       end

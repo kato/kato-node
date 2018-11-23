@@ -7,3 +7,12 @@ script:
 - set -e
 - npm run test
 - npm run build
+
+deploy:
+  provider: npm
+  email: demon@danwi.me
+  api_key:
+    secure: HUajsyoAPrCOHR5lemgFZ0jz3HQ3ZVlDm593bJHnHJ89B3WPXvpe9iN9cE0/TF4/qzW1dbNRbKR8wLBd9GWXj+skPlr4CFApjkO2EfudJ2NQXaEy3vMz06dFxV5Rv5iO1jRycoB8L6vZbEW2ICijCMcWPOVOzoc3sBCAUNMSSmB7jAmYWxW0sLrjFtSxqSkk0FAOQqdPgfVxVS8RIZZRDawzLzK8RjwVgHLa8VOZX4bi23wrseY5pcv5/mxOjl18UvM/ePBXv1nQ8vUX+gjKn6Lkjoq4HiwP6SbT+M7z7zlfulSY32zQHwFwK8a53/kE98tV9BqRyIWFCKVjHFLtr+yWH9VegobT62FwnJz7A2o/iGKSFqbYaX7CsGZ4uknZ5oxETYaOrMdGdW+xUmCRAlfUdxXqU7obTDUTyLJ8Fa2i0levt+rEFlWoXVT7WMp6LgqIke8rg/9cIukHSDN5o3l7lCYAXD8XxU8rAAne7wZzjuBjGd5CxSBWtntzT1Cjzawb8SOSh8qh+ru5r95kDzDWuhr7Re2bdZAAVVW3XYf2ai6+kvfFTaQa/EF12GomCD5jXy8Dx22GTgEMhuYNtqI835NUFv7+3oPUJjrtnKJtVxUM9zfKD2tQrXbIQ8mNZkSEM2lqpX9VOgEnCRNw5lqqAIJqsfqRbkVT8hIiaeg=
+  on:
+    tags: true
+    repo: kato/kato-node

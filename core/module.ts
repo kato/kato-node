@@ -1,4 +1,5 @@
 import * as getParameterNames from 'get-parameter-names'
+import {cleanStubCache} from "./middleware/stub";
 
 const debug = require('debug')('kato:core:module');
 
@@ -98,6 +99,9 @@ export class ModuleContainer extends Map<string, ModuleDescriptor> {
     //解析模块为模块描述,并添加到容器中
     let module = new ModuleDescriptor(moduleClass);
     this.set(module.name, module);
+
+    //清除stub缓存
+    cleanStubCache();
 
     //输出模块概要信息
     let methodNames = [];

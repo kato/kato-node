@@ -19,7 +19,7 @@ export default async function stub(ctx: Context, next: Middleware) {
       const stub = {
         modules: []
       };
-      for (const [moduleName, module] of ctx.kato.modules.entries()) {
+      for (const [moduleName, module] of ctx.kato.modules) {
         const moduleStub = {
           name: moduleName,
           methods: []

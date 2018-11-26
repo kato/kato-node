@@ -10,6 +10,7 @@ import urlEncoded from "./middleware/parameter/url-encoded";
 import multipart from "./middleware/parameter/multipart";
 import paramValidate from "./middleware/validate";
 import authenticate from "./middleware/auth";
+import cors from "./middleware/cors";
 
 const debug = require('debug')('kato:core:middle');
 
@@ -28,6 +29,7 @@ export class MiddlewareContainer {
     this.middlewares = [
       trycatch,
       stub,
+      cors,
       parse,
       queryString,
       jsonBody,

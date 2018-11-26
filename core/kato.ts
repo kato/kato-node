@@ -4,6 +4,7 @@ import * as prettyJson from 'prettyjson';
 import Context from "./context";
 import {MiddlewareContainer} from "./middleware";
 import {ModuleContainer} from "./module";
+import {KatoCorsOptions} from "./middleware/cors";
 
 const debug = require('debug')('kato:core');
 
@@ -22,7 +23,8 @@ type KatoOptions = {
     maxSize?: number
     //一次最多允许多少个文件上传
     maxCount?: number
-  }
+  },
+  cors?: KatoCorsOptions
 }
 
 export default class Kato {

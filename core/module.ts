@@ -110,7 +110,7 @@ export class ModuleContainer extends Map<string, ModuleDescriptor> {
     }
     debug(`模块${module.name}加载完成,函数${module.methods.size}个`);
     for (let method of module.methods.values()) {
-      debug(`\t-> ${method}`)
+      debug(`-> ${method}`)
     }
   }
 }

@@ -28,8 +28,8 @@ export class MiddlewareContainer {
     //初始化内建的中间件
     this.middlewares = [
       trycatch,
-      stub,
       cors,
+      stub,
       parse,
       queryString,
       jsonBody,

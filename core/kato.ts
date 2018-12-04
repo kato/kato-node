@@ -1,10 +1,8 @@
-import * as mergeOptions from 'merge-options';
 import * as http from "http";
-import * as prettyJson from 'prettyjson';
 import Context from "./context";
 import {MiddlewareContainer} from "./middleware";
 import {ModuleContainer} from "./module";
-import {defaultOptions, KatoOptions} from "./options";
+import {getOptions, KatoOptions} from "./options";
 
 const debug = require('debug')('kato:core');
 
@@ -19,8 +17,7 @@ export default class Kato {
   server?: http.Server;
 
   constructor(options: KatoOptions = {}) {
-    this.options = mergeOptions(defaultOptions, options);
-    debug(`Kato Options:\n${prettyJson.render(this.options, {noColor: true})}\n`);
+    this.options = getOptions(options);
   }
 
   //添加中间件

@@ -11,6 +11,7 @@ export {default as InvokeMiddleware} from './core/middleware/invoke'
 export {default as EndMiddleware} from './core/middleware/end'
 export {default as ValidateMiddleware} from './core/middleware/validate'
 export {default as AuthenticateMiddleware} from './core/middleware/auth'
+export {default as CorsMiddleware} from './core/middleware/cors'
 
 //validate
 export {validate, should} from './core/middleware/validate'

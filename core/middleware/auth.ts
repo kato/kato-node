@@ -50,7 +50,7 @@ export function or(...authFuncs: AuthFunction[]): AuthFunction {
     return new Promise((resolve, reject) => {
       //并行地执行验证函数,并拿到结果
       const results = authFuncs.map(func => {
-        const result = func(ctx) as any;
+        const result = func(ctx) as any || false;
         //将返回值promise化
         return result.then ? result : Promise.resolve(result);
       });
@@ -86,7 +86,7 @@ export function and(...authFuncs: AuthFunction[]): AuthFunction {
     return new Promise((resolve, reject) => {
       //并行地执行验证函数,并拿到结果
       const results = authFuncs.map(func => {
-        const result = func(ctx) as any;
+        const result = func(ctx) as any || false;
         //将返回值promise化
         return result.then ? result : Promise.resolve(result);
       });

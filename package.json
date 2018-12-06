@@ -1,6 +1,6 @@
 {
   "name": "kato-server",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "kato server",
   "main": "dist/index.js",
   "files": [

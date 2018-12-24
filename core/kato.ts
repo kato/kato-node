@@ -1,5 +1,6 @@
 import * as http from "http";
-import Context, {katoCLS} from "./context";
+import {createNamespace} from 'cls-hooked';
+import Context from "./context";
 import {MiddlewareContainer} from "./middleware";
 import {ModuleContainer} from "./module";
 import {getOptions, KatoOptions} from "./options";
@@ -7,6 +8,9 @@ import {IncomingMessage, ServerResponse} from "http";
 import {transformer} from "./http/transformer";
 
 const debug = require('debug')('kato:core');
+
+//CLS存储空间
+export const katoCLS = createNamespace('kato');
 
 export default class Kato {
   //中间件容器

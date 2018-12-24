@@ -1,9 +1,8 @@
 import Context from "./context";
 import invoke from "./middleware/invoke";
 import parse from "./middleware/parse";
-import end from "./middleware/end";
 import stub from "./middleware/stub";
-import trycatch from "./middleware/trycatch";
+import respond from "./middleware/respond";
 import queryString from "./middleware/parameter/query-string";
 import jsonBody from "./middleware/parameter/json-body";
 import urlEncoded from "./middleware/parameter/url-encoded";
@@ -27,7 +26,7 @@ export class MiddlewareContainer {
   constructor() {
     //初始化内建的中间件
     this.middlewares = [
-      trycatch,
+      respond,
       cors,
       stub,
       parse,
@@ -37,8 +36,7 @@ export class MiddlewareContainer {
       multipart,
       authenticate,
       paramValidate,
-      invoke,
-      end
+      invoke
     ];
     debug(`加载了${this.middlewares.length}个中间件 => [${this.middlewares.map(it => it.name || '匿名').join(',')}]`);
     this.firstMiddleware = this.middlewares[0];

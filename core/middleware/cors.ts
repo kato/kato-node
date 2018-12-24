@@ -24,7 +24,8 @@ export default async function cors(ctx: Context, next: Middleware) {
     if (ctx.req.method === 'OPTIONS') {
       ctx.res.statusCode = options.optionsStatusCode;
       ctx.res.setHeader('Content-Length', 0);
-      ctx.res.end();
+      //跳过正常的返回值转换
+      ctx.bypassing = true;
 
       return;
     }

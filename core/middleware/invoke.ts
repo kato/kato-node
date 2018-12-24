@@ -11,5 +11,7 @@ export default async function invoke(ctx: Context, next: Middleware) {
   module.context = ctx;
   //调用方法,同时也处理好异步
   ctx.result = await ctx.method.method.apply(module, args);
-  await next()
+
+  //继续下一个中间件,如果有需要的话
+  await next();
 }

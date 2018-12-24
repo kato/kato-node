@@ -38,7 +38,9 @@ export default async function stub(ctx: Context, next: Middleware) {
     }
 
     ctx.res.setHeader("Content-Type", "application/json");
-    ctx.res.end(stubCache);
+    ctx.res.body = stubCache;
+    //跳过正常的返回转换
+    ctx.bypassing = true;
   } else
     await next()
 }

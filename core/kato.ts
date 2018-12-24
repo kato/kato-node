@@ -3,6 +3,8 @@ import Context from "./context";
 import {MiddlewareContainer} from "./middleware";
 import {ModuleContainer} from "./module";
 import {getOptions, KatoOptions} from "./options";
+import {IncomingMessage, ServerResponse} from "http";
+import {transformer} from "./http/transformer";
 
 const debug = require('debug')('kato:core');
 
@@ -29,16 +31,20 @@ export default class Kato {
   load = this.modules.load.bind(this.modules);
 
   //执行来自适配器过来的实例
-  async do(ctx: Context) {
+  async do(req: IncomingMessage, res: ServerResponse) {
+    //新建一个kato的context
+    const ctx = new Context(req, res);
     ctx.kato = this;
     //交给中间件去处理
     await this.middlewares.do(ctx);
+    //中间件处理完毕,开始把res的结果输出到http
+    transformer(ctx.res)
   }
 
   //启动原生服务器
   async listen(port: number, hostname: string = "localhost") {
     return new Promise(((resolve, reject) => {
-      this.server = http.createServer((req, res) => this.do(new Context(req, res)));
+      this.server = http.createServer(this.do.bind(this));
       this.server.listen.call(this.server, port, hostname, err => {
         err ? reject(err) : resolve();
       });

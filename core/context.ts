@@ -1,10 +1,21 @@
+import {createNamespace} from 'cls-hooked'
 import {ModuleDescriptor, MethodDescriptor} from "./module";
 import Kato from "./kato";
 import {createRequest, KatoRequest} from "./http/request";
 import {createResponse, KatoResponse} from "./http/response";
 import {IncomingMessage, ServerResponse} from "http";
 
+const contextSymbol = Symbol('kato-context');
+
+//当前上下文
+export const katoCLS = createNamespace('kato');
+
 export default class Context {
+  //获取当前的异步路径的上下文
+  public static get current(): Context {
+    return katoCLS.get(contextSymbol)
+  }
+
   //kato实例
   public kato: Kato;
 
@@ -31,5 +42,8 @@ export default class Context {
   constructor(req: IncomingMessage, res: ServerResponse) {
     this.req = createRequest(req);
     this.res = createResponse(res);
+
+    //注入到当前上下文中
+    katoCLS.set(contextSymbol, this);
   }
 }

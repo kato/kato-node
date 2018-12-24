@@ -62,6 +62,7 @@
   "dependencies": {
     "@types/joi": "^14.0.0",
     "body-parser": "^1.18.3",
+    "cls-hooked": "^4.2.2",
     "dayjs": "^1.7.7",
     "debug": "^4.1.0",
     "destroy": "^1.0.4",

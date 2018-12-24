@@ -1,5 +1,5 @@
 import * as http from "http";
-import Context from "./context";
+import Context, {katoCLS} from "./context";
 import {MiddlewareContainer} from "./middleware";
 import {ModuleContainer} from "./module";
 import {getOptions, KatoOptions} from "./options";
@@ -32,13 +32,15 @@ export default class Kato {
 
   //执行来自适配器过来的实例
   async do(req: IncomingMessage, res: ServerResponse) {
-    //新建一个kato的context
-    const ctx = new Context(req, res);
-    ctx.kato = this;
-    //交给中间件去处理
-    await this.middlewares.do(ctx);
-    //中间件处理完毕,开始把res的结果输出到http
-    transformer(ctx.res)
+    return await katoCLS.runAndReturn(async () => {
+      //新建一个kato的context
+      const ctx = new Context(req, res);
+      ctx.kato = this;
+      //交给中间件去处理
+      await this.middlewares.do(ctx);
+      //中间件处理完毕,开始把res的结果输出到http
+      transformer(ctx.res)
+    });
   }
 
   //启动原生服务器

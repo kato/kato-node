@@ -3,6 +3,8 @@ import {cleanStubCache} from "./middleware/stub";
 
 const debug = require('debug')('kato:core:module');
 
+const aliasSymbol = Symbol('kato-alias');
+
 export class ModuleDescriptor {
   //模块名
   name: string;
@@ -10,7 +12,7 @@ export class ModuleDescriptor {
   methods: Map<string, MethodDescriptor>;
 
   constructor(public module) {
-    this.name = module.__alias || module.name;
+    this.name = module[aliasSymbol] || module.name;
     if (!this.name)
       throw new Error("kato:模块类不能是匿名类");
 
@@ -60,7 +62,7 @@ export class MethodDescriptor {
   parameters: ParameterDescriptor[];
 
   constructor(public method: Function | any, public parent: ModuleDescriptor) {
-    this.name = method.__alias || method.name;
+    this.name = method[aliasSymbol] || method.name;
     if (!this.name)
       throw new Error("kato:不允许有匿名方法");
 
@@ -126,7 +128,7 @@ export function alias(name) {
       if (typeof target !== 'function') {
         throw new Error('kato:alias只能作用于类及其方法上')
       }
-      target.__alias = name;
+      target[aliasSymbol] = name;
     }
   } else
     throw new Error("kato:名称不能为空");

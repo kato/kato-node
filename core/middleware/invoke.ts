@@ -7,10 +7,14 @@ export default async function invoke(ctx: Context, next: Middleware) {
   const args = ctx.method.parameters.map(p => ctx.parameters[p.name]);
   //实例化module
   const module = new ctx.module.module();
-  //注入context
-  module.context = ctx;
+  //代理context
+  const moduleProxy = new Proxy(module, {
+    get(target: any, key: PropertyKey): any {
+      return key === 'context' ? ctx : target[key];
+    }
+  });
   //调用方法,同时也处理好异步
-  ctx.result = await ctx.method.method.apply(module, args);
+  ctx.result = await ctx.method.method.apply(moduleProxy, args);
 
   //继续下一个中间件,如果有需要的话
   await next();

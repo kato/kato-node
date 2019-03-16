@@ -23,7 +23,7 @@ export default async function paramValidate(ctx: Context, next: Middleware) {
       .forEach(it => {
         const result = joi.validate(it.value, it.schema.label(it.name), {convert: false});
         if (result.error) {
-          throw new KatoRuntimeError(`${ctx.module.name}.${ctx.method.name} => ${result.error.message}`)
+          throw new KatoRuntimeError(result.error.message)
         }
       })
   }

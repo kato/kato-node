@@ -1,8 +1,14 @@
 import Context from "../context";
 import {Middleware} from "../middleware";
-import {KatoRuntimeError} from "../error";
+import {KatoError} from "../error";
 
-const debug = require('debug')('kato:middle:auth');
+//权限验证异常
+export class KatoAuthError extends KatoError {
+  constructor(message: string = "不具备调用权限") {
+    super(message, -2);
+    this.name = 'KatoAuthError';
+  }
+}
 
 const authFuncsSymbol = Symbol('kato-auth-functions');
 
@@ -13,7 +19,7 @@ export default async function authenticate(ctx: Context, next: Middleware) {
     //将验证函数变成为or组合
     const combinedAuth = or(...authFuncs);
     if (!(await combinedAuth(ctx)))
-      throw new KatoRuntimeError(`不具备调用${ctx.module.name}.${ctx.method.name}的权限`)
+      throw new KatoAuthError(`不具备调用${ctx.module.name}.${ctx.method.name}的权限`)
   }
 
   await next();

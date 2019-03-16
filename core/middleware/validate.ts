@@ -2,9 +2,15 @@ import Context from "../context";
 import {Middleware} from "../middleware";
 import * as joi from 'joi';
 import {Schema, SchemaLike} from "joi";
-import {KatoRuntimeError} from "../error";
+import {KatoError} from "../error";
 
-const debug = require('debug')('kato:middle:validate');
+//参数验证异常
+export class KatoValidateError extends KatoError {
+  constructor(message: string = "非法的API参数调用") {
+    super(message, -3);
+    this.name = 'KatoValidateError';
+  }
+}
 
 const validateSymbol = Symbol('kato-validate');
 
@@ -23,7 +29,7 @@ export default async function paramValidate(ctx: Context, next: Middleware) {
       .forEach(it => {
         const result = joi.validate(it.value, it.schema.label(it.name), {convert: false});
         if (result.error) {
-          throw new KatoRuntimeError(result.error.message)
+          throw new KatoValidateError(result.error.message)
         }
       })
   }

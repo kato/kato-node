@@ -30,7 +30,7 @@ export default async function multipart(ctx: Context, next: Middleware) {
   //文件解析
   req.files && req.files.forEach(file => {
     if (ctx.method.parameters.findIndex(p => p.name === file.fieldname) !== -1) {
-      ctx.parameters[file.fieldname] = file;
+      (ctx.parameters[file.fieldname] = (ctx.parameters[file.fieldname] || [])).push(file);
     }
   });
 

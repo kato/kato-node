@@ -19,7 +19,7 @@ export default async function multipart(ctx: Context, next: Middleware) {
 
   //解析multipart数据
   const multipartParser = middlewareWrapper(multer({
-    storage: ctx.kato.options.files.storage || multer.memoryStorage(),
+    storage: ctx.kato.options.files.storage ?? multer.memoryStorage(),
     limits: {
       files: ctx.kato.options.files.maxCount,
       fileSize: ctx.kato.options.files.maxSize
@@ -30,7 +30,7 @@ export default async function multipart(ctx: Context, next: Middleware) {
   //文件解析
   req.files && req.files.forEach(file => {
     if (ctx.method.parameters.findIndex(p => p.name === file.fieldname) !== -1) {
-      ctx.parameters[file.fieldname] = file;
+      (ctx.parameters[file.fieldname] = (ctx.parameters[file.fieldname] ?? [])).push(file);
     }
   });
 

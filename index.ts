@@ -22,6 +22,8 @@ export {default as Kato} from './core/kato'
 export {default as Context} from './core/context'
 export * from './core/error'
 export {alias} from './core/module'
+export {KatoRequest} from './core/http/request'
+export {KatoResponse} from './core/http/response'
 
 //express适配器
 export {adapter as ExpressAdapter} from './express'

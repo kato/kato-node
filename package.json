@@ -50,7 +50,7 @@
     "express": "^4.17.1",
     "husky": "^3.0.4",
     "jest": "^24.9.0",
-    "nodemon-webpack-plugin": "^4.0.8",
+    "nodemon-webpack-plugin": "^4.3.2",
     "source-map-support": "^0.5.13",
     "supertest": "^4.0.2",
     "ts-loader": "^6.2.2",

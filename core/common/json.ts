@@ -10,9 +10,8 @@ export function reviver(key, value) {
 }
 
 export function replacer(key, value) {
-  if (typeof value === 'string')
-    if (ISO8601Regex.exec(value))
-      return dayjs(value).format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+  if (this[key] instanceof Date)
+    return dayjs(value).format("YYYY-MM-DDTHH:mm:ss.SSSZ");
   return value;
 }
 
